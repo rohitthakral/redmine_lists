@@ -1,0 +1,7 @@
+<h2>Edit List</h2>
+<%= form_with(model: [@project, @list]) do |form| %>
+  <p><%= form.label :name %><br><%= form.text_field :name %></p>
+  <p><%= form.label :description %><br><%= form.text_area :description %></p>
+  <p><%= form.check_box :global %> Global List</p>
+  <p><%= form.submit 'Update' %></p>
+<% end %>

@@ -1,0 +1,5 @@
+<h2>New List Item</h2>
+<%= form_with(model: [@list, @item]) do |form| %>
+  <p><%= form.label :value %><br><%= form.text_field :value %></p>
+  <p><%= form.submit 'Add' %></p>
+<% end %>

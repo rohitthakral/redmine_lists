@@ -1,0 +1,7 @@
+<h2>Items in <%= @list.name %></h2>
+<ul>
+  <% @items.each do |item| %>
+    <li><%= item.value %> - <%= link_to 'Edit', edit_list_list_item_path(@list, item) %> | <%= link_to 'Delete', list_list_item_path(@list, item), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  <% end %>
+</ul>
+<%= link_to 'Add Item', new_list_list_item_path(@list) %>
