@@ -29,7 +29,7 @@
         <td><%= item.updated_at.to_date %></td>
         <td>
           <%= link_to 'Edit', projects_lists_edit_path(@project,item), class: 'icon-only icon-edit' %> 
-          <%= link_to 'Delete', projects_lists_delete_path(@project,item), :data => {:confirm => l(:text_are_you_sure)},
+          <%= link_to 'Delete', projects_lists_destroy_path(@project,item), :data => {:confirm => l(:text_are_you_sure)},
                     :method => :delete,
                     :title => l(:button_delete),
                     :class => 'icon-only icon-del' %>

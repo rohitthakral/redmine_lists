@@ -2,6 +2,7 @@ class ProjectsListsController < ApplicationController
 	include CustomFieldsHelper
 	helper :custom_fields
 	before_action :find_optional_project
+	# after_action :rebuild_project_menu, only: :settings_update
 	def settings_update
 		if params['list_ids'].blank?
 			ProjectList.where(project_id: @project.id).delete_all
@@ -101,6 +102,20 @@ class ProjectsListsController < ApplicationController
 	end
 
 	private
+
+	def rebuild_project_menu
+		Redmine::MenuManager.map :project_menu do |menu|
+			binding.pry
+		    # menu.delete(:testing)
+		    # if some_condition
+		    #   menu.push :custom_tab,
+		    #             { controller: 'custom', action: 'index' },
+		    #             caption: 'Custom Tab',
+		    #             param: :project_id,
+		    #             after: :activity
+		    # end
+		end
+	end
 
 	def permit_param
 		params.require(:list).permit(:name, :description, :global)

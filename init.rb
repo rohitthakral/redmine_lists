@@ -16,7 +16,8 @@ Redmine::Plugin.register :redmine_lists do
   Redmine::MenuManager.map :project_menu do |menu|
     List.all.each do |list|
           menu.push list.name.underscore.to_sym, {:controller => 'projects_lists', :action => 'index', list_id: list.id},:after => :issues, :param => :project_id, caption: "#{list.name}",
-              :if => Proc.new { |p| ProjectList.where(project_id: p.id, list_id: list.id).present? && User.current.allowed_to?(:manage_lists, p)}
+              :if => Proc.new { |p| ProjectList.where(project_id: p.id, list_id: list.id).present? && User.current.allowed_to?(:manage_lists, p)},
+              html: {class: 'list_items_project_menu'}
     end
   end
 

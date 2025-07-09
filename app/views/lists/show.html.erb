@@ -1,18 +1,20 @@
 <div class="contextual">
-  <%= link_to "Add Custom Field", new_list_path, method: 'get', class: 'icon icon-add' %> |
+  <%= link_to "Add Custom Field", new_custom_field_path(tab: ListCustomField.to_s), method: 'get', class: 'icon icon-add' %> |
   <%= link_to 'Back', lists_path %>
 </div>
 <h2><%= @list.name %></h2>
 <fieldset id="create_conf_block">
 	<legend><b>CustomFields</b></legend>
-	<% if @fields.size > 0 %>
+	<% if ListCustomField.all.size > 0 %>
+	<%= form_tag lists_custom_field_path(@list) do |f| %>
 	<table class="list issues odd-even sort-by-id sort-desc">
 	  <thead>
-	    <tr><th>Name</th><th>Format</th><th>Description</th><th>Required</th></tr>
+	    <tr><th></th><th>Name</th><th>Format</th><th>Description</th><th>Required</th></tr>
 	  </thead>
 	  <tbody>
-	    <% @fields.each do |field| %>
+	    <% ListCustomField.all.each do |field| %>
 	      <tr>
+	      	<td><input type="checkbox" name="custom_fields[]" <%= @fields.pluck(:id).include?(field.id) ? 'checked' : '' %> value="<%= field.id %>"></td>
 	        <td><%= link_to field.name, edit_custom_field_path(field) %></td>
 	        <td><%= field.format.name %></td>
 	        <td><%= field.description %></td>
@@ -21,6 +23,8 @@
 	    <% end %>
 	  </tbody>
 	</table>
+	<%= submit_tag 'Save' %>
+	<% end %>
 	<% else %>
 	<p>No fields found</p>
 	<% end %>

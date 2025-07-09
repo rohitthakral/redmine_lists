@@ -1,6 +1,5 @@
 <div class="contextual">
-  <%= link_to "Add", new_list_path, method: 'get', class: 'icon icon-add' %> |
-  <%= link_to 'Back', lists_path %>
+  <%= link_to "Add", new_list_path, method: 'get', class: 'icon icon-add' %>
 </div>
 <h2>Lists</h2>
 <table class="list issues odd-even sort-by-id sort-desc">
@@ -13,8 +12,8 @@
         <td><%= link_to list.name, list_path(list) %></td>
         <td><%= list.description %></td>
         <td>
-          <%= link_to 'Edit', edit_list_path(list) %> |
-          <%= link_to 'Delete', list_path(list), method: :delete %>
+          <%= link_to 'Edit', edit_list_path(list), class: 'icon-only icon-edit' %> 
+          <%= link_to 'Delete', list_path(list), :data => {:confirm => l(:text_are_you_sure)}, class: 'icon-only icon-del', method: :delete %>
         </td>
       </tr>
     <% end %>
