@@ -1,0 +1,17 @@
+<% 
+	prj_lists = ProjectList.where(project_id: @project.id).pluck(:list_id)
+%>
+<p><label><b>Timesheet Type: </b></label></p>
+<%= form_tag projects_lists_update_path(@project) do |f| %>
+<div class="box tabular">
+	<% List.all.each do |list| %>
+    <label class="block list_ids" style="padding-left:2em;">
+      <%= check_box_tag 'list_ids[]', list.id, prj_lists.include?(list.id), :id => nil %>
+      <%= list.name %>
+    </label>
+  <% end %>
+  	<div>
+		<%= submit_tag 'Save' %>
+	</div>
+</div>
+<% end %>

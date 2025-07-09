@@ -5,6 +5,8 @@ class CreateLists < ActiveRecord::Migration[6.1]
       t.text :description
       t.boolean :global, default: false
       t.integer :author_id
+      t.integer :last_updated_id
+      
       t.timestamps
     end
   end

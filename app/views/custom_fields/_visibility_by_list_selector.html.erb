@@ -1,0 +1,10 @@
+<fieldset class="box tabular"><legend><%= l(:label_list_plural) %></legend>
+  <% list_ids = @custom_field.lists.map(&:id) %>
+  <% List.all.each do |list| %>
+    <label class="block custom_field_list" style="padding-left:2em;">
+      <%= check_box_tag 'custom_field[list_ids][]', list.id, list_ids.include?(list.id), :id => nil %>
+      <%= list.name %>
+    </label>
+  <% end %>
+  <%= hidden_field_tag 'custom_field[list_ids][]', '' %>
+</fieldset>

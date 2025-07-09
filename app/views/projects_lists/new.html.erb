@@ -1,0 +1,30 @@
+<h3>New Contact</h3>
+<div class="box tabular filedroplistner">
+  <%= form_tag projects_lists_create_path(@project,@list) do |f| %>
+    <% custom_field_values = @list_item.custom_field_values %>
+    <% custom_field_values_full_width = custom_field_values.select { |value| value.custom_field.full_width_layout? } %>
+    <% custom_field_values -= custom_field_values_full_width %>
+
+    <% if custom_field_values.present? %>
+    <div class="splitcontent">
+      <div class="splitcontentleft">
+      <% i = 0 %>
+      <% split_on = (custom_field_values.size / 2.0).ceil - 1 %>
+      <% custom_field_values.each do |value| %>
+        <p><%= custom_field_tag_with_label :project_list, value, :required => (value.custom_field.is_required?) %></p>
+      <% if i == split_on -%>
+      </div>
+      <div class="splitcontentright">
+        <% end -%>
+        <% i += 1 -%>
+        <% end -%>
+      </div>
+    </div>
+    <% end %>
+    <div class="splitcontent">
+      <div class="splitcontentleft">
+        <p><%= submit_tag 'Save' %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
